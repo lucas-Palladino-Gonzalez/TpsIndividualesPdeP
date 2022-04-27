@@ -23,16 +23,16 @@ descodiciarProducto :: Producto -> Producto
 descodiciarProducto producto = producto {nombre = take 10 (nombre producto)}
 
 productoDeLujo :: Producto -> Bool
-productoDeLujo producto = elem 'x' (nombre producto) || elem 'z' (nombre producto)
+productoDeLujo (UnProducto nombreDelProducto _) = elem 'x' nombreDelProducto || elem 'z' nombreDelProducto
 
 aplicarCostoDeEnvio :: Producto -> Int -> Producto
 aplicarCostoDeEnvio producto costoEnvio = producto {precio = precio producto + costoEnvio}
 
 productoCodiciado :: Producto -> Bool
-productoCodiciado producto = (length.nombre $ producto) > 10
+productoCodiciado (UnProducto nombreDelProducto _) = (length nombreDelProducto) > 10
 
 productoCorriente :: Producto -> Bool
-productoCorriente producto = elem (head.nombre $producto) "aeiouAEIOU"
+productoCorriente (UnProducto nombreDelProducto _) = elem (head nombreDelProducto) "aeiouAEIOU"
 
 productoXL :: Producto -> Producto
 productoXL producto = producto {nombre = nombre producto ++ "XL"} 
